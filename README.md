@@ -77,4 +77,4 @@ http://localhost:5000
 
 ## 🔗 GitHub Repository
 
-https://github.com/amandeepjol-eng/ecommerce-store
+https://github.com/amandeepjol-eng/CodeAlpha_ecommerce-store
