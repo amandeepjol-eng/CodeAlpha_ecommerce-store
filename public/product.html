@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details - ShopEase</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .product-page {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            color: #7c8795;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: #f59e0b;
+            text-decoration: none;
+        }
+
+        .product-detail-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            padding: 45px;
+            background: #131820;
+            border: 1px solid #292f38;
+            border-radius: 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .35);
+        }
+
+        .detail-image {
+            min-height: 430px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, #29313c, #151a21);
+            border: 1px solid #303741;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-badge {
+            width: fit-content;
+            padding: 7px 12px;
+            color: #fbbf24;
+            background: rgba(245, 158, 11, .12);
+            border: 1px solid rgba(245, 158, 11, .25);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .detail-info h1 {
+            color: #f9fafb;
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .detail-rating {
+            color: #f59e0b;
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+
+        .detail-rating span {
+            color: #7c8795;
+            margin-left: 8px;
+        }
+
+        .detail-description {
+            color: #9ca3af;
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .detail-price {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .current-price {
+            color: #fbbf24;
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .detail-old-price {
+            color: #6b7280;
+            text-decoration: line-through;
+            font-size: 17px;
+        }
+
+        .save-text {
+            color: #4ade80;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .detail-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .feature {
+            padding: 13px;
+            background: #0e1319;
+            border: 1px solid #292f38;
+            border-radius: 9px;
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .feature span {
+            color: #f59e0b;
+            margin-right: 7px;
+        }
+
+        .detail-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .detail-add {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #f59e0b;
+            color: #111827;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .detail-add:hover {
+            background: #fbbf24;
+            transform: translateY(-2px);
+        }
+
+        .detail-cart {
+            padding: 15px 22px;
+            background: #20262e;
+            color: #e5e7eb;
+            border: 1px solid #3a424d;
+            border-radius: 9px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .detail-cart:hover {
+            border-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #f59e0b;
+        }
+
+
+        /* =================================
+           COMMON ICON
+           ================================= */
+
+        .detail-product-icon {
+            width: 100%;
+            min-height: 430px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =================================
+           SMARTPHONE
+           ================================= */
+
+        .detail-phone {
+            width: 115px;
+            height: 220px;
+            border: 5px solid #f59e0b;
+            border-radius: 25px;
+            padding: 9px;
+            position: relative;
+            background: #111827;
+            box-shadow: 0 0 40px rgba(245, 158, 11, .18);
+            transform: rotate(-3deg);
+        }
+
+        .detail-phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 17px;
+            background: linear-gradient(145deg, #111827, #1e293b, #312e81);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-phone-camera {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 7px;
+            background: #050505;
+            border-radius: 10px;
+            z-index: 5;
+        }
+
+        .detail-phone-button {
+            position: absolute;
+            bottom: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 4px;
+            background: #f59e0b;
+            border-radius: 10px;
+        }
+
+        .detail-screen-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.18);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .detail-screen-line {
+            width: 70px;
+            height: 4px;
+            background: rgba(255,255,255,.18);
+            position: absolute;
+            top: 67%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+
+        /* =================================
+           LAPTOP
+           ================================= */
+
+        .detail-laptop {
+            width: 300px;
+            position: relative;
+            filter: drop-shadow(0 0 30px rgba(245,158,11,.15));
+        }
+
+        .detail-laptop-screen {
+            width: 255px;
+            height: 165px;
+            margin: auto;
+            padding: 7px;
+            border: 6px solid #f59e0b;
+            border-radius: 14px 14px 5px 5px;
+            background: #111827;
+        }
+
+        .detail-laptop-display {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(145deg, #111827, #1e293b, #312e81);
+            position: relative;
+        }
+
+        .detail-display-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.18);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .detail-display-line {
+            width: 85px;
+            height: 4px;
+            background: rgba(255,255,255,.18);
+            position: absolute;
+            top: 68%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .detail-laptop-base {
+            width: 300px;
+            height: 14px;
+            margin-top: 4px;
+            background: #f59e0b;
+            border-radius: 3px 3px 12px 12px;
+            position: relative;
+        }
+
+        .detail-laptop-base::after {
+            content: "";
+            position: absolute;
+            width: 65px;
+            height: 4px;
+            background: #111827;
+            left: 50%;
+            top: 5px;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+
+        /* =================================
+           HEADPHONES - NEW
+           ================================= */
+
+        .detail-headphones {
+            width: 260px;
+            height: 240px;
+            position: relative;
+        }
+
+        .detail-headband {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border: 20px solid #f59e0b;
+            border-bottom: 0;
+            border-radius: 100px 100px 0 0;
+            top: 5px;
+            left: 50px;
+        }
+
+        .detail-ear-left,
+        .detail-ear-right {
+            position: absolute;
+            width: 55px;
+            height: 95px;
+            background: #f59e0b;
+            border-radius: 20px;
+            top: 115px;
+            z-index: 5;
+            box-shadow: 0 0 20px rgba(245,158,11,.18);
+        }
+
+        .detail-ear-left {
+            left: 10px;
+        }
+
+        .detail-ear-right {
+            right: 10px;
+        }
+
+        .detail-ear-left::after,
+        .detail-ear-right::after {
+            content: "";
+            position: absolute;
+            width: 29px;
+            height: 59px;
+            background: #111827;
+            border-radius: 15px;
+            top: 18px;
+            left: 13px;
+        }
+
+
+        /* =================================
+           SMART WATCH
+           ================================= */
+
+        .detail-watch {
+            width: 150px;
+            height: 300px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-watch-strap-top,
+        .detail-watch-strap-bottom {
+            position: absolute;
+            width: 65px;
+            height: 80px;
+            background: #374151;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 12px;
+        }
+
+        .detail-watch-strap-top {
+            top: 0;
+        }
+
+        .detail-watch-strap-bottom {
+            bottom: 0;
+        }
+
+        .detail-watch-body {
+            width: 140px;
+            height: 145px;
+            background: #111827;
+            border: 7px solid #f59e0b;
+            border-radius: 32px;
+            position: relative;
+            z-index: 2;
+            padding: 10px;
+        }
+
+        .detail-watch-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #111827, #1e293b, #312e81);
+            border-radius: 22px;
+            position: relative;
+        }
+
+        .detail-watch-time {
+            color: white;
+            font-size: 19px;
+            font-weight: bold;
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .detail-watch-circle {
+            width: 35px;
+            height: 35px;
+            border: 3px solid #f59e0b;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        /* =================================
+           KEYBOARD
+           ================================= */
+
+        .detail-keyboard {
+            width: 330px;
+            height: 145px;
+            padding: 18px;
+            background: #111827;
+            border: 6px solid #f59e0b;
+            border-radius: 18px;
+            box-shadow: 0 0 40px rgba(245,158,11,.15);
+        }
+
+        .detail-keyboard-keys {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .detail-keyboard-keys span {
+            height: 18px;
+            background: #374151;
+            border-radius: 4px;
+            border: 1px solid #4b5563;
+        }
+
+        .detail-keyboard-keys span:nth-child(16) {
+            grid-column: span 2;
+        }
+
+
+        /* =================================
+           MOUSE
+           ================================= */
+
+        .detail-mouse {
+            width: 120px;
+            height: 180px;
+            background: #111827;
+            border: 6px solid #f59e0b;
+            border-radius: 60px;
+            position: relative;
+            box-shadow: 0 0 40px rgba(245,158,11,.15);
+        }
+
+        .detail-mouse-line {
+            position: absolute;
+            width: 4px;
+            height: 60px;
+            background: #374151;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .detail-mouse-wheel {
+            width: 15px;
+            height: 35px;
+            background: #f59e0b;
+            border-radius: 10px;
+            position: absolute;
+            top: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        /* =================================
+           TABLET
+           ================================= */
+
+        .detail-tablet {
+            width: 220px;
+            height: 290px;
+            background: #111827;
+            border: 7px solid #f59e0b;
+            border-radius: 25px;
+            padding: 12px;
+            position: relative;
+            box-shadow: 0 0 40px rgba(245,158,11,.15);
+            transform: rotate(-2deg);
+        }
+
+        .detail-tablet-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #111827, #1e293b, #312e81);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .detail-tablet-camera {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #f59e0b;
+            border-radius: 50%;
+            top: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .detail-tablet-circle {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255,255,255,.18);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .detail-tablet-line {
+            width: 100px;
+            height: 5px;
+            background: rgba(255,255,255,.18);
+            position: absolute;
+            top: 68%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+
+        /* DEFAULT */
+
+        .detail-default-icon {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #f59e0b;
+            border-radius: 22px;
+            color: #f59e0b;
+            font-size: 50px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .product-detail-card {
+                grid-template-columns: 1fr;
+                padding: 25px;
+                gap: 30px;
+            }
+
+            .detail-image {
+                min-height: 330px;
+            }
+
+            .detail-product-icon {
+                min-height: 330px;
+            }
+
+            .detail-info h1 {
+                font-size: 32px;
+            }
+
+            .detail-laptop {
+                transform: scale(.8);
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .detail-features {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-buttons {
+                flex-direction: column;
+            }
+
+            .detail-phone {
+                width: 95px;
+                height: 185px;
+            }
+
+            .detail-laptop {
+                transform: scale(.65);
+            }
+
+            .detail-keyboard {
+                transform: scale(.75);
+            }
+
+            .detail-tablet {
+                transform: scale(.75);
+            }
+
+            .detail-headphones {
+                transform: scale(.8);
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🛍️ <span>ShopEase</span>
+        </div>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="orders.html">Orders</a>
+
+            <a href="login.html">Login</a>
+
+            <a href="cart.html" class="cart-link">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="product-page">
+
+        <div class="breadcrumb">
+
+            <a href="index.html">Home</a>
+
+            &nbsp; / &nbsp;
+
+            Product Details
+
+        </div>
+
+
+        <div id="productDetails">
+            Loading product...
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <h2>🛍️ ShopEase</h2>
+
+        <p>
+            Your simple and trusted online shopping store.
+        </p>
+
+        <div>
+
+            <a href="index.html">Home</a>
+
+            <a href="orders.html">Orders</a>
+
+            <a href="cart.html">Cart</a>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 ShopEase. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        let cart =
+            JSON.parse(localStorage.getItem("cart")) || [];
+
+
+        function updateCartCount() {
+
+            const count =
+                document.getElementById("cartCount");
+
+            if (count) {
+                count.innerText = cart.length;
+            }
+        }
+
+
+        updateCartCount();
+
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const productId =
+            params.get("id");
+
+
+        fetch("/products")
+
+            .then(response => response.json())
+
+            .then(products => {
+
+                const product =
+                    products.find(
+                        p => p.id == productId
+                    );
+
+
+                if (!product) {
+
+                    document.getElementById(
+                        "productDetails"
+                    ).innerHTML = `
+
+                        <div style="
+                            text-align:center;
+                            padding:60px;
+                            background:#131820;
+                            border-radius:18px;
+                        ">
+
+                            <h2>Product Not Found</h2>
+
+                            <p style="
+                                color:#9ca3af;
+                                margin:15px 0;
+                            ">
+                                Sorry, this product does not exist.
+                            </p>
+
+                            <a
+                                href="index.html"
+                                class="back-link"
+                            >
+                                ← Back to Store
+                            </a>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                /* DEFAULT */
+
+                let icon = `
+
+                    <div class="detail-product-icon">
+
+                        <div class="detail-default-icon">
+                            ◇
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                /* SMARTPHONE */
+
+                if (
+                    product.name
+                        .toLowerCase()
+                        .includes("smartphone")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-phone">
+
+                                <div class="detail-phone-camera"></div>
+
+                                <div class="detail-phone-screen">
+
+                                    <div class="detail-screen-circle"></div>
+
+                                    <div class="detail-screen-line"></div>
+
+                                </div>
+
+                                <div class="detail-phone-button"></div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* LAPTOP */
+
+                else if (
+                    product.name
+                        .toLowerCase()
+                        .includes("laptop")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-laptop">
+
+                                <div class="detail-laptop-screen">
+
+                                    <div class="detail-laptop-display">
+
+                                        <div class="detail-display-circle"></div>
+
+                                        <div class="detail-display-line"></div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="detail-laptop-base"></div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* HEADPHONES */
+
+                else if (
+                    product.name
+                        .toLowerCase()
+                        .includes("headphone")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-headphones">
+
+                                <div class="detail-headband"></div>
+
+                                <div class="detail-ear-left"></div>
+
+                                <div class="detail-ear-right"></div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* SMART WATCH */
+
+                else if (
+                    product.name
+                        .toLowerCase()
+                        .includes("watch")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-watch">
+
+                                <div class="detail-watch-strap-top"></div>
+
+                                <div class="detail-watch-body">
+
+                                    <div class="detail-watch-screen">
+
+                                        <div class="detail-watch-time">
+                                            10:09
+                                        </div>
+
+                                        <div class="detail-watch-circle"></div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="detail-watch-strap-bottom"></div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* KEYBOARD */
+
+                else if (
+                    product.name
+                        .toLowerCase()
+                        .includes("keyboard")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-keyboard">
+
+                                <div class="detail-keyboard-keys">
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* MOUSE */
+
+                else if (
+                    product.name
+                        .toLowerCase()
+                        .includes("mouse")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-mouse">
+
+                                <div class="detail-mouse-line"></div>
+
+                                <div class="detail-mouse-wheel"></div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* TABLET */
+
+                else if (
+                    product.name
+                        .toLowerCase()
+                        .includes("tablet")
+                ) {
+
+                    icon = `
+
+                        <div class="detail-product-icon">
+
+                            <div class="detail-tablet">
+
+                                <div class="detail-tablet-camera"></div>
+
+                                <div class="detail-tablet-screen">
+
+                                    <div class="detail-tablet-circle"></div>
+
+                                    <div class="detail-tablet-line"></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                const price =
+                    Number(product.price);
+
+                const oldPrice =
+                    price + 5000;
+
+
+                document.getElementById(
+                    "productDetails"
+                ).innerHTML = `
+
+                    <div class="product-detail-card">
+
+
+                        <div class="detail-image">
+
+                            ${icon}
+
+                        </div>
+
+
+                        <div class="detail-info">
+
+
+                            <div class="detail-badge">
+                                ★ BEST SELLER
+                            </div>
+
+
+                            <h1>
+                                ${product.name}
+                            </h1>
+
+
+                            <div class="detail-rating">
+
+                                ⭐⭐⭐⭐⭐
+
+                                <span>
+                                    4.8 (120+ Reviews)
+                                </span>
+
+                            </div>
+
+
+                            <p class="detail-description">
+
+                                ${product.description}
+
+                            </p>
+
+
+                            <div class="detail-price">
+
+                                <span class="current-price">
+
+                                    ₹${price.toLocaleString("en-IN")}
+
+                                </span>
+
+
+                                <span class="detail-old-price">
+
+                                    ₹${oldPrice.toLocaleString("en-IN")}
+
+                                </span>
+
+
+                                <span class="save-text">
+
+                                    Save ₹5,000
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="detail-features">
+
+                                <div class="feature">
+                                    <span>✓</span>
+                                    Genuine Product
+                                </div>
+
+                                <div class="feature">
+                                    <span>✓</span>
+                                    Fast Delivery
+                                </div>
+
+                                <div class="feature">
+                                    <span>✓</span>
+                                    Secure Payment
+                                </div>
+
+                                <div class="feature">
+                                    <span>✓</span>
+                                    Easy Returns
+                                </div>
+
+                            </div>
+
+
+                            <div class="detail-buttons">
+
+                                <button
+                                    class="detail-add"
+                                    onclick="addToCart('${product.name}', ${price})"
+                                >
+                                    🛒 Add to Cart
+                                </button>
+
+
+                                <button
+                                    class="detail-cart"
+                                    onclick="window.location.href='cart.html'"
+                                >
+                                    View Cart
+                                </button>
+
+                            </div>
+
+
+                            <a
+                                href="index.html"
+                                class="back-link"
+                            >
+                                ← Continue Shopping
+                            </a>
+
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+
+
+            .catch(error => {
+
+                console.log(
+                    "Error loading product:",
+                    error
+                );
+
+            });
+
+
+        function addToCart(name, price) {
+
+            cart.push({
+
+                name: name,
+
+                price: "₹" + price
+
+            });
+
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+
+            updateCartCount();
+
+
+            alert(
+                name +
+                " added to cart! 🛒"
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>

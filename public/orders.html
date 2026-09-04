@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ My E-Store</h1>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="orders.html">My Orders</a>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <h2>My Orders</h2>
+
+    <div id="orders"></div>
+
+    <script>
+
+        async function loadOrders() {
+
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            if (!user) {
+                alert("Please login first.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const response = await fetch("/orders/" + user.id);
+
+            const orders = await response.json();
+
+            const ordersDiv = document.getElementById("orders");
+
+            if (orders.length === 0) {
+                ordersDiv.innerHTML = "<h3 style='text-align:center;'>No orders found.</h3>";
+                return;
+            }
+
+            ordersDiv.innerHTML = "";
+
+            orders.forEach(order => {
+
+                ordersDiv.innerHTML += `
+                    <div>
+                        <h3>Order #${order.id}</h3>
+
+                        <p>
+                            <strong>Total:</strong> ₹${order.total}
+                        </p>
+
+                        <p>
+                            <strong>Order Date:</strong> ${order.order_date}
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong> Order Placed ✅
+                        </p>
+                    </div>
+                `;
+
+            });
+        }
+
+        loadOrders();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEase - Online Store</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">
+            🛍️ <span>ShopEase</span>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                onkeyup="searchProducts()"
+            >
+            <span>🔍</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="orders.html">Orders</a>
+            <a href="login.html">Login</a>
+
+            <a href="cart.html" class="cart-link">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">WELCOME TO SHOPEASE</p>
+
+            <h1>
+                Everything You Need,
+                <span>All in One Place.</span>
+            </h1>
+
+            <p>
+                Discover amazing products at affordable prices.
+                Shop smart. Shop easy.
+            </p>
+
+            <button onclick="scrollToProducts()">
+                Shop Now →
+            </button>
+
+        </div>
+
+        <div class="hero-icon">
+            🛍️
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+
+        <h2>Shop by Category</h2>
+
+        <div class="category-list">
+
+            <div class="category">
+                📱
+                <span>Electronics</span>
+            </div>
+
+            <div class="category">
+                💻
+                <span>Laptops</span>
+            </div>
+
+            <div class="category">
+                🎧
+                <span>Accessories</span>
+            </div>
+
+            <div class="category">
+                ⭐
+                <span>Best Sellers</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <section class="products-section" id="productsSection">
+
+        <div class="section-heading">
+
+            <div>
+                <p>OUR COLLECTION</p>
+                <h2>Featured Products</h2>
+            </div>
+
+            <span class="product-count" id="productCount"></span>
+
+        </div>
+
+        <div id="products"></div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>🛍️ ShopEase</h2>
+
+        <p>
+            Your simple and trusted online shopping store.
+        </p>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="orders.html">Orders</a>
+            <a href="cart.html">Cart</a>
+        </div>
+
+        <p class="copyright">
+            © 2026 ShopEase. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

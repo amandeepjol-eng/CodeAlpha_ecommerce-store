@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - My E-Store</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ My E-Store</h1>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="orders.html">My Orders</a>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="register.html">Register</a>
+        </nav>
+    </header>
+
+    <h2>Login to Your Account</h2>
+
+    <form id="loginForm">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <div style="text-align:center; margin-top:20px;">
+
+        <p>Don't have an account?</p>
+
+        <button onclick="window.location.href='register.html'">
+            Create Account
+        </button>
+
+    </div>
+
+    <script>
+
+        document.getElementById("loginForm")
+            .addEventListener("submit", async function(e) {
+
+                e.preventDefault();
+
+                const email =
+                    document.getElementById("email").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+                const response = await fetch("/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+
+                });
+
+                const data = await response.json();
+
+                alert(data.message);
+
+                if (response.ok) {
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify(data.user)
+                    );
+
+                    window.location.href = "index.html";
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
